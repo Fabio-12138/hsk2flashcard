@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      input {
+        display: none;
+      }
+      .checkbox input + label {
+        background-color: black;
+      }
+      .checkbox input:checked + label {
+        background-color: white;
+      }
+    </style>
+    <script type="module">
+      const hanzi = document.querySelector("#hanzi");
+      const pinyin = document.querySelector("#pinyin");
+      const translation = document.querySelector("#translation");
+
+      const list = [
+        { hanzi: "章", pinyin: "zhāng", translations: ["chapter"] },
+        { hanzi: "篮球", pinyin: "lánqiú", translations: ["basketball"] },
+        { hanzi: "运动", pinyin: "yùndòng", translations: ["sports"] },
+        { hanzi: "发展", pinyin: "fāzhǎn", translations: ["develop"] },
+        { hanzi: "欣赏", pinyin: "xīnshǎng", translations: ["appreciate"] },
+        {
+          hanzi: "对待",
+          pinyin: "duìdài",
+          translations: ["treat", "deal with", "handle"],
+        },
+        {
+          hanzi: "比赛",
+          pinyin: "bǐsài",
+          translations: ["game", "match", "competition"],
+        },
+        { hanzi: "谦虚", pinyin: "qiānxū", translations: ["modest"] },
+        {
+          hanzi: "热情",
+          pinyin: "rèqíng",
+          translations: ["enthusiasm", "enthusiastic"],
+        },
+        {
+          hanzi: "态度",
+          pinyin: "tàidù",
+          translations: ["attitude", "manner", "bearing"],
+        },
+        {
+          hanzi: "如今",
+          pinyin: "rújīn",
+          translations: ["now", "nowadays", "the present"],
+        },
+        {
+          hanzi: "优点",
+          pinyin: "yōudiǎn",
+          translations: ["advantage", "merig", "strong point"],
+        },
+        { hanzi: "球员", pinyin: "qiúyuán", translations: ["ball player"] },
+        { hanzi: "前=", pinyin: "qián", translations: ["former"] },
+        { hanzi: "火箭", pinyin: "huǒjiàn", translations: ["rocket"] },
+        { hanzi: "队", pinyin: "duì", translations: ["team"] },
+        { hanzi: "教练", pinyin: "jiàoliàn", translations: ["coack"] },
+        {
+          hanzi: "大体上",
+          pinyin: "dàtǐshàng",
+          translations: ["general", "on the whole"],
+        },
+        { hanzi: "告诉", pinyin: "gàosù", translations: ["tell", "inform"] },
+        {
+          hanzi: "骄傲",
+          pinyin: "jiāo'ào",
+          translations: ["proud", "arrogant", "pride"],
+        },
+        { hanzi: "以", pinyin: "yǐ", translations: ["with", "use", "to take"] },
+        {
+          hanzi: "庄重",
+          pinyin: "zhuāngzhòng",
+          translations: ["solemn", "serious"],
+        },
+        {
+          hanzi: "优雅",
+          pinyin: "yōuyǎ",
+          translations: ["elegant", "refined"],
+        },
+        { hanzi: "幽默", pinyin: "yōumò", translations: ["humor"] },
+        {
+          hanzi: "方式",
+          pinyin: "fāngshì",
+          translations: ["manner", "way", "pattern", "form"],
+        },
+        { hanzi: "回答", pinyin: "huídá", translations: ["answer"] },
+        {
+          hanzi: "数",
+          pinyin: "shù",
+          translations: ["several (used before numbers)"],
+        },
+        {
+          hanzi: "问题",
+          pinyin: "wèntí",
+          translations: ["question", "issue", "problem"],
+        },
+        { hanzi: "肩", pinyin: "jiān", translations: ["shoulder"] },
+        { hanzi: "担子", pinyin: "dànzǐ", translations: ["burden"] },
+        {
+          hanzi: "之间",
+          pinyin: "zhījiān",
+          translations: ["between", "in the midst of"],
+        },
+        { hanzi: "大使", pinyin: "dàshǐ", translations: ["ambassador"] },
+        {
+          hanzi: "通过",
+          pinyin: "tōngguò",
+          translations: ["by way of", "through", "pass"],
+        },
+        {
+          hanzi: "逐渐",
+          pinyin: "zhújiàn",
+          translations: ["gradually", "little by little"],
+        },
+        { hanzi: "了解", pinyin: "liǎojiě", translations: ["understand"] },
+        { hanzi: "许多", pinyin: "xǔduō", translations: ["many", "a lot of"] },
+        {
+          hanzi: "认识",
+          pinyin: "rènshí",
+          translations: ["know", "understand", "knowledge"],
+        },
+        { hanzi: "主席", pinyin: "zhǔxí", translations: ["chairman"] },
+        { hanzi: "总部", pinyin: "zǒngbù", translations: ["headquarters"] },
+        { hanzi: "会见", pinyin: "huìjiàn", translations: ["meet"] },
+        {
+          hanzi: "体育",
+          pinyin: "tǐyù",
+          translations: ["sports", "physical training"],
+        },
+        { hanzi: "教授", pinyin: "jiàoshòu", translations: ["professor"] },
+        {
+          hanzi: "发明",
+          pinyin: "fāmíng",
+          translations: ["invent", "invention"],
+        },
+        { hanzi: "项", pinyin: "xiàng", translations: ["item"] },
+        { hanzi: "希望", pinyin: "xīwàng", translations: ["hope"] },
+        {
+          hanzi: "漫长",
+          pinyin: "màncháng",
+          translations: ["very long(of time, a road"],
+        },
+        { hanzi: "冬天", pinyin: "dōngtiān", translations: ["winter"] },
+        {
+          hanzi: "保持",
+          pinyin: "bǎochí",
+          translations: ["keep", "mantain", "preserve"],
+        },
+        {
+          hanzi: "体形",
+          pinyin: "tǐxíng",
+          translations: ["bodily form", "build"],
+        },
+        {
+          hanzi: "从此",
+          pinyin: "cóngcǐ",
+          translations: ["from now on", "henceforth"],
+        },
+        { hanzi: "渐渐", pinyin: "jiànjiàn", translations: ["gradually"] },
+        {
+          hanzi: "传",
+          pinyin: "chuán",
+          translations: ["transmit to", "transfer to", "pass"],
+        },
+        { hanzi: "地球", pinyin: "dìqiú", translations: ["Earth"] },
+        { hanzi: "角落", pinyin: "jiǎoluò", translations: ["corner"] },
+        { hanzi: "成为", pinyin: "chéngwéi", translations: ["become"] },
+        { hanzi: "世界", pinyin: "shìjiè", translations: ["world"] },
+        {
+          hanzi: "流行",
+          pinyin: "liúxíng",
+          translations: ["popular", "fashionable"],
+        },
+        { hanzi: "之一", pinyin: "zhīyī", translations: ["one of the"] },
+        { hanzi: "来自", pinyin: "láizì", translations: ["come from"] },
+        {
+          hanzi: "不同",
+          pinyin: "bùtóng",
+          translations: ["different", "difference"],
+        },
+        { hanzi: "文化", pinyin: "wénhuà", translations: ["culture"] },
+        { hanzi: "背景", pinyin: "bèijǐng", translations: ["background"] },
+        { hanzi: "语言", pinyin: "yǔyán", translations: ["language"] },
+        { hanzi: "通过", pinyin: "tōngguò", translations: ["trough", "via"] },
+        {
+          hanzi: "聚集",
+          pinyin: "jùjí",
+          translations: ["gather", "assemble", "collect"],
+        },
+        {
+          hanzi: "近年来",
+          pinyin: "jìnniánlái",
+          translations: ["in recent years"],
+        },
+        { hanzi: "吸引", pinyin: "xīyǐn", translations: ["attract"] },
+        {
+          hanzi: "优秀",
+          pinyin: "yōuxiù",
+          translations: ["excellent", "outstanding"],
+        },
+        {
+          hanzi: "各地",
+          pinyin: "gèdì",
+          translations: ["everywhere", "various places"],
+        },
+        { hanzi: "迷", pinyin: "mí", translations: ["fan"] },
+        { hanzi: "电视", pinyin: "diànshì", translations: ["Television(TV)"] },
+        { hanzi: "观看", pinyin: "guānkàn", translations: ["watch", "view"] },
+        { hanzi: "喜爱", pinyin: "xǐài", translations: ["love", "be fond of"] },
+        {
+          hanzi: "外箱",
+          pinyin: "wàixiāng",
+          translations: ["forein nationality"],
+        },
+        {
+          hanzi: "出众",
+          pinyin: "chūzhòng",
+          translations: ["superior", "extraordinary"],
+        },
+        {
+          hanzi: "也许",
+          pinyin: "yěxǔ",
+          translations: ["perhaps", "maybe", "possibly"],
+        },
+        { hanzi: "欢迎", pinyin: "huānyíng", translations: ["welcome"] },
+        { hanzi: "英尺", pinyin: "yīngchǐ", translations: ["foot"] },
+        { hanzi: "英寸", pinyin: "yīngcùn", translations: ["inch"] },
+        {
+          hanzi: "球技",
+          pinyin: "qiújì",
+          translations: ["skill in ball games"],
+        },
+        {
+          hanzi: "亲切",
+          pinyin: "qīnqiē",
+          translations: ["cordial", "kind", "friendly", "close"],
+        },
+        {
+          hanzi: "开朗",
+          pinyin: "kāilǎng",
+          translations: ["cheerful", "sanguine"],
+        },
+        {
+          hanzi: "性格",
+          pinyin: "xìnggé",
+          translations: ["character", "disposition"],
+        },
+        { hanzi: "不仅", pinyin: "bùjǐn", translations: ["not only"] },
+        {
+          hanzi: "能够",
+          pinyin: "nénggòu",
+          translations: ["can", "be able to"],
+        },
+        {
+          hanzi: "篮筐",
+          pinyin: "lánkuāng",
+          translations: ["basketball hoop", "baskets"],
+        },
+        {
+          hanzi: "之",
+          pinyin: "zhī",
+          translations: ["of(traditional equivalent of 'de'"],
+        },
+        {
+          hanzi: "封盖",
+          pinyin: "fēnggài",
+          translations: ["cover", "close over", "defeat"],
+        },
+        {
+          hanzi: "对手",
+          pinyin: "duìshǒu",
+          translations: ["rival", "opponent"],
+        },
+        { hanzi: "或者", pinyin: "huòzhě", translations: ["or"] },
+        {
+          hanzi: "猛烈",
+          pinyin: "měngliè",
+          translations: ["violent", "fierce", "vigorous"],
+        },
+        { hanzi: "灌篮", pinyin: "guànlán", translations: ["slam dunk"] },
+        {
+          hanzi: "快速",
+          pinyin: "kuàisù",
+          translations: ["fast", "high-speed"],
+        },
+        { hanzi: "场地", pinyin: "chǎngdì", translations: ["site", "place"] },
+        {
+          hanzi: "声东击西",
+          pinyin: "shēngdōngjīxī",
+          translations: [
+            "ise doversionary tactics",
+            "<declare or feign an attack to the east but actually to the west>",
+          ],
+        },
+        { hanzi: "外线", pinyin: "wàixiàn", translations: ["exterior lines"] },
+        {
+          hanzi: "轻佻",
+          pinyin: "qīngtiāo",
+          translations: ["skip", "jump slightly"],
+        },
+        {
+          hanzi: "投篮",
+          pinyin: "tóulán",
+          translations: ["shoot( a basketball)", "shot"],
+        },
+        { hanzi: "巨星", pinyin: "jùxīng", translations: ["giant star"] },
+        {
+          hanzi: "记者",
+          pinyin: "jìzhě",
+          translations: ["reporter", "journalist"],
+        },
+        {
+          hanzi: "曾",
+          pinyin: "céng",
+          translations: ["(adverbial particle indicating past action once)"],
+        },
+        {
+          hanzi: "最佳",
+          pinyin: "zuìjiā",
+          translations: ["optimal", "the best"],
+        },
+        {
+          hanzi: "个人",
+          pinyin: "gèrén",
+          translations: ["personal", "individual"],
+        },
+        {
+          hanzi: "魅力",
+          pinyin: "mèilì",
+          translations: ["charm", "fascination", "charisma"],
+        },
+        { hanzi: "帮助", pinyin: "bāngzhù", translations: ["help"] },
+        {
+          hanzi: "出现",
+          pinyin: "chūxiàn",
+          translations: ["appear", "emerge"],
+        },
+        {
+          hanzi: "认为",
+          pinyin: "rènwéi",
+          translations: ["think", "consider", "deem"],
+        },
+        {
+          hanzi: "荒唐",
+          pinyin: "huāngtáng",
+          translations: ["absurd", "preposterous"],
+        },
+        {
+          hanzi: "当时",
+          pinyin: "dāngshí",
+          translations: ["then", "at that time"],
+        },
+        {
+          hanzi: "知道",
+          pinyin: "zhīdào",
+          translations: ["know", "understand"],
+        },
+        {
+          hanzi: "达到",
+          pinyin: "dádào",
+          translations: ["reach", "achieve", "accomplish"],
+        },
+        {
+          hanzi: "水平",
+          pinyin: "shuǐpíng",
+          translations: ["level", "standard"],
+        },
+        { hanzi: "共和国", pinyin: "gònghéguó", translations: ["republic"] },
+        {
+          hanzi: "成立",
+          pinyin: "chénglì",
+          translations: ["set up", "establish", "found"],
+        },
+        {
+          hanzi: "社会主义",
+          pinyin: "shèhuìzhǔyì",
+          translations: ["socialism"],
+        },
+        {
+          hanzi: "社会",
+          pinyin: "shèhuì",
+          translations: ["community", "society"],
+        },
+        { hanzi: "政府", pinyin: "zhèngfǔ", translations: ["government"] },
+        {
+          hanzi: "尽量",
+          pinyin: "jǐnliàng",
+          translations: ["as much as possible"],
+        },
+        { hanzi: "控制", pinyin: "kòngzhì", translations: ["control"] },
+        {
+          hanzi: "方面",
+          pinyin: "fāngmiàn",
+          translations: ["respect", "aspect"],
+        },
+        {
+          hanzi: "包括",
+          pinyin: "bāokuò",
+          translations: ["include", "consist of", "contain"],
+        },
+        {
+          hanzi: "事业",
+          pinyin: "shìyè",
+          translations: ["cause", "undertaking", "career"],
+        },
+        {
+          hanzi: "一直",
+          pinyin: "yīzhí",
+          translations: ["has been", "up until"],
+        },
+        { hanzi: "年代", pinyin: "niándài", translations: ["decade"] },
+        {
+          hanzi: "重视",
+          pinyin: "zhòngshì",
+          translations: [
+            "attach importance to",
+            "think highly of",
+            "pay attention to",
+          ],
+        },
+        { hanzi: "人口", pinyin: "rénkǒu", translations: ["population"] },
+        {
+          hanzi: "超过",
+          pinyin: "chāoguò",
+          translations: ["exceed", "surpass"],
+        },
+        { hanzi: "亿", pinyin: "yì", translations: ["hundred million"] },
+        {
+          hanzi: "特别",
+          pinyin: "tèbié",
+          translations: ["special", "particular", "especially", "particularly"],
+        },
+        {
+          hanzi: "培养",
+          pinyin: "péiyǎng",
+          translations: ["culture", "cultivate", "train"],
+        },
+        {
+          hanzi: "代表",
+          pinyin: "dàibiǎo",
+          translations: ["on behalf of", "represent"],
+        },
+        {
+          hanzi: "国家队",
+          pinyin: "guójiāduì",
+          translations: ["national team"],
+        },
+        {
+          hanzi: "参加",
+          pinyin: "cānjiā",
+          translations: ["participate", "take part in"],
+        },
+        { hanzi: "之类", pinyin: "zhīlèi", translations: ["such", "alike"] },
+        { hanzi: "国际", pinyin: "guójì", translations: ["international"] },
+        {
+          hanzi: "挑选",
+          pinyin: "tiāoxuǎn",
+          translations: ["select", "choose"],
+        },
+        {
+          hanzi: "潜力",
+          pinyin: "qiánlì",
+          translations: ["potential", "potentiality"],
+        },
+        {
+          hanzi: "训练",
+          pinyin: "xùnliàn",
+          translations: ["train", "exercise", "training"],
+        },
+        { hanzi: "将来", pinyin: "jiānglái", translations: ["future"] },
+        {
+          hanzi: "效力",
+          pinyin: "xiàolì",
+          translations: ["serve", "work for"],
+        },
+        {
+          hanzi: "娱乐",
+          pinyin: "yúlè",
+          translations: ["entertainment", "amusement"],
+        },
+        {
+          hanzi: "并且",
+          pinyin: "bìngqiě",
+          translations: ["and", "besides", "moreover"],
+        },
+        {
+          hanzi: "公共",
+          pinyin: "gōnggòng",
+          translations: ["public", "common"],
+        },
+        {
+          hanzi: "篮球场",
+          pinyin: "lánqiúchǎng",
+          translations: ["basketball court"],
+        },
+        {
+          hanzi: "情况",
+          pinyin: "qíngkuàng",
+          translations: ["situation", "circumstances"],
+        },
+        {
+          hanzi: "改变",
+          pinyin: "gǎibiàn",
+          translations: ["change (verb, noun)"],
+        },
+        {
+          hanzi: "意识",
+          pinyin: "yìshí",
+          translations: ["be aware of", "awareness"],
+        },
+        {
+          hanzi: "有助于",
+          pinyin: "yǒuzhùyú",
+          translations: ["contribute", "be conducive to"],
+        },
+        {
+          hanzi: "强身健体",
+          pinyin: "qiángshēnjiàntǐ",
+          translations: ["strenghten body and keep fit"],
+        },
+        {
+          hanzi: "鼓励",
+          pinyin: "gǔlì",
+          translations: ["encourage", "inspire", "spur on"],
+        },
+        {
+          hanzi: "参与",
+          pinyin: "cānyù",
+          translations: ["participate in", "join in"],
+        },
+        {
+          hanzi: "由于",
+          pinyin: "yóuyú",
+          translations: ["as a result of", "because of"],
+        },
+        {
+          hanzi: "要求",
+          pinyin: "yāoqiú",
+          translations: ["require", "demand", "requirement"],
+        },
+        {
+          hanzi: "设备",
+          pinyin: "shèbèi",
+          translations: ["equipment", "facilities"],
+        },
+        {
+          hanzi: "比较",
+          pinyin: "bǐjiào",
+          translations: ["comparatively", "relatively"],
+        },
+        {
+          hanzi: "对外",
+          pinyin: "duìwài",
+          translations: ["to the outside world", "external"],
+        },
+        { hanzi: "开放", pinyin: "kāifàng", translations: ["open"] },
+        { hanzi: "播放", pinyin: "bòfàng", translations: ["broadcast"] },
+        { hanzi: "电视台", pinyin: "diànshìtái", translations: ["TV station"] },
+        { hanzi: "节目", pinyin: "jiémù", translations: ["program"] },
+        { hanzi: "兴趣", pinyin: "xìngqù", translations: ["interest"] },
+        { hanzi: "网络", pinyin: "wǎngluò", translations: ["net", "network"] },
+        { hanzi: "城市", pinyin: "chéngshì", translations: ["city"] },
+        { hanzi: "年轻", pinyin: "niánqīng", translations: ["young"] },
+        {
+          hanzi: "甚至",
+          pinyin: "shènzhì",
+          translations: ["even", "go so far as to"],
+        },
+        {
+          hanzi: "职业",
+          pinyin: "zhíyè",
+          translations: ["professional", "profession"],
+        },
+        { hanzi: "联赛", pinyin: "liánsài", translations: ["league"] },
+        {
+          hanzi: "普通",
+          pinyin: "pǔtōng",
+          translations: ["general", "ordinary", "average"],
+        },
+        { hanzi: "赛季", pinyin: "sàijì", translations: ["playing season"] },
+        { hanzi: "超级", pinyin: "chāojí", translations: ["super-"] },
+      ];
+      function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      const selectButton = document.querySelector("#next");
+      console.log(hanzi);
+      selectButton.onclick = () => {
+        // console.log("test", getRandom(list));
+        const item = getRandom(list);
+        hanzi.querySelector("h2").innerText = item.hanzi;
+        pinyin.querySelector("input").checked = false;
+        pinyin.querySelector("label").innerText = item.pinyin;
+        translation.querySelector("label").innerText =
+          item.translations.join(", ");
+        translation.querySelector("input").checked = false;
+      };
+      console.log(list);
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <fieldset>
+      <legend>Quiz</legend>
+      <div id="pinyin" class="checkbox">
+        <input id="in1" type="checkbox" />
+        <label for="in1">pinyin</label>
+      </div>
+      <div id="hanzi" class="checkbox">
+        <h2>Hanzi</h2>
+      </div>
+      <div id="translation" class="checkbox">
+        <input id="in3" type="checkbox" />
+        <label for="in3">translation</label>
+      </div>
+      <button id="next">next</button>
+    </fieldset>
+  </body>
+</html>
